@@ -66,12 +66,28 @@ const generateId = () => {
     return maxId + 1
 }
 
+const findName = (name) =>{
+    const found = persons.find(person => person.name === name)
+
+    if(found){
+        return true
+    }else{
+        return false
+    }
+}
+
 app.post('/api/persons', (request, response) =>{
     const body = request.body
 
     if(!body.name || !body.number){
         return response.status(400).json({
             error: 'content missing'
+        })
+    }
+
+    if(findName(body.name)){
+        return response.status(409).json({
+            error: 'Person already exists'
         })
     }
 
