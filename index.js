@@ -28,8 +28,16 @@ app.get('/', (request, response) =>{
     response.send('<h1> hello world.. </h1>')
 })
 
+let cont = 0
+
 app.get('/api/persons', (request, response) =>{
+    cont++
     response.json(persons)
+})
+
+app.get('/info', (request, response) =>{ 
+    const hora = new Date().toString()
+    response.send(`Phonebook has info for ${cont} people <br/> <br/> ${hora}`)
 })
 
 const PORT = 3002
