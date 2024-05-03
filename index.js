@@ -31,7 +31,7 @@ let persons = [
 ]
 
 app.get('/', (request, response) =>{
-    response.send('<h1> hello world.. </h1>')
+    response.send('<h1> Hello world.. </h1> <h2> This api was made by Valentino Boggio </h2> <p> In progress.. </p>')
 })
 
 let cont = 0
@@ -106,7 +106,7 @@ app.post('/api/persons', (request, response) =>{
     response.json(person)
 })
 
-const PORT = 3002
-app.listen(PORT, () =>{
-    console.log(`Server running on port ${PORT}`)
+const PORT = process.env.PORT || 3002
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`)
 })
