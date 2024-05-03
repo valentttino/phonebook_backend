@@ -31,7 +31,7 @@ let persons = [
 ]
 
 app.get('/', (request, response) =>{
-    response.send('<h1> Hello world.. </h1> <h2> This api was made by Valentino Boggio </h2> <p> In progress.. </p>')
+    response.send('<h1> Hello world.. </h1> <h2> This API was made by Valentino Boggio </h2> <p> In progress.. </p>')
 })
 
 let cont = 0
