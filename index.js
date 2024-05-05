@@ -65,22 +65,15 @@ app.delete('/api/persons/:id', (request, response) =>{
     response.status(204).end()
 })
 
-const generateId = () => {
-    const maxId = persons.length > 0
-      ? Math.max(...persons.map(n => n.id))
-      : 0
-    return maxId + 1
-}
+// const findName = (name) =>{
+//     const found = persons.find(person => person.name === name)
 
-const findName = (name) =>{
-    const found = persons.find(person => person.name === name)
-
-    if(found){
-        return true
-    }else{
-        return false
-    }
-}
+//     if(found){
+//         return true
+//     }else{
+//         return false
+//     }
+// }
 
 app.post('/api/persons', (request, response) =>{
     const body = request.body
@@ -91,21 +84,20 @@ app.post('/api/persons', (request, response) =>{
         })
     }
 
-    if(findName(body.name)){
-        return response.status(409).json({
-            error: 'Person already exists'
-        })
-    }
+    // if(findName(body.name)){
+    //     return response.status(409).json({
+    //         error: 'Person already exists'
+    //     })
+    // }
 
-    const person = {
+    const person = new Person({
         name: body.name,
-        number: body.number,
-        id: generateId(),
-    }
+        number: body.number
+    })
 
-    persons = persons.concat(person)
-
-    response.json(person)
+    person.save().then(savedPerson => {
+        response.json(savedPerson)
+    })
 })
 
 const PORT = process.env.PORT
